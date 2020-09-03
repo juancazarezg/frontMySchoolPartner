@@ -111,13 +111,9 @@ export default class Inbox extends Component {
                 mappedMessages
               ) : (
                 <div className="inbox-hero">
-                  <img
-                    src="https://cdn.monday.com/assets/macarons.png"
-                    alt="inbox"
-                  />
                   <h4>Wooohoo!</h4>
-                  <p>You've reached the holy state of Inbox Zero.</p>
-                  <p>Go ahead and treat yourself.</p>
+                  <p>No tienes pendientes</p>
+                  <p>Te mereces un descanso</p>
                 </div>
               )}
             </div>

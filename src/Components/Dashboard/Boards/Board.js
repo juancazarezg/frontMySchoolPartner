@@ -10,8 +10,8 @@ export default class Board extends React.Component {
     return (
       <div className="lists">
         <List title="Tareas" id={1} />
-        <List title="Text" id={2} />
-        <List title="Date" id={3} />
+        <List title="Proyectos" id={2} />
+        <List title="Examenes" id={3} />
       </div>
     );
   }

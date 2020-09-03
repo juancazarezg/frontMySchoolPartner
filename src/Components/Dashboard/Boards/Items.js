@@ -95,7 +95,7 @@ export default class Items extends React.Component {
             </div>
           ) : (
             <a className="addCard" onClick={this.addCard.bind(this)}>
-              Add a card...
+              Añade recordatorio...
             </a>
           )}
         </footer>

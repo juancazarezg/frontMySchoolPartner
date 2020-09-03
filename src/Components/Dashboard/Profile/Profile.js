@@ -44,19 +44,9 @@ export default class Profile extends Component {
         <Header />
         <Navbar />
         {/* <h1 id="profile">Profile</h1> */}
-        <div className="img-username-container">
-          <img
-            src={this.state.user.picture}
-            alt=""
-            className="img-fluid profile-header-img"
-          />
-          <div className="user-name">
-            <p>{this.state.user.user_name}</p>
-          </div>
-        </div>
-        <div className="overview-container">
+        <div className="container col-lg-7" style={{paddingTop:"7vw"}}>
           <span className="overview">
-            <p className="overview-text">Overview</p>
+            <p className="overview-text">Información personal</p>
           </span>
           <div className="title">
             <div className="user-icon">

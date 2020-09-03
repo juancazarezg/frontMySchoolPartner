@@ -53,7 +53,7 @@ class Header extends React.Component {
     return (
       <div className="header-nav">
         <nav className="navbar header-bar">
-          <img className="header-logo" src={logo} alt="headerlogo" />
+          <img className="header-logo" src={logo} alt="headerlogo" style={{width:"15vw", paddingLeft:"20px"}}/>
         </nav>
         <header className="top-header ">
           <Link to="/dashboard">
@@ -63,10 +63,10 @@ class Header extends React.Component {
             <i className="fa fa-users users-icon" />
           </Link>
           <i className="fa fa-search search-icon" />
-          <input
+          <input style={{display:"none"}}
             className="search-bar"
             type="search"
-            placeholder="Search Everything ..."
+            placeholder="Buscar..."
             aria-label="Search"
           />
           <div className="header-right float-right">
@@ -82,12 +82,8 @@ class Header extends React.Component {
             </span>
             <div className="btn profile-div">
               <Link to="/dashboard/profile">
-                <img
-                  src={this.state.user.picture}
-                  alt="profile pic"
-                  className="img-fluid profile-img"
-                />
-                <i className="fa fa-arrow-circle-down" />
+                <p>Perfil</p>
+                <i className="fa fa-arrow-circle-down" style={{paddingBottom:"2vw"}}/>
               </Link>
             </div>
           </div>

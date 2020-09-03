@@ -39,11 +39,11 @@ export default class Hero extends Component {
     return (
       <div className="container" id="product">
         <div className="hero-container">
-          <h1 className="display-4">
-            A new way to manage your <span>task</span>
+          <h1 className="display-4"style={{textAlign:"center"}}>
+            Una nueva forma de administrar tu <span>vida estudiantil</span>
           </h1>
           <p className="hero-p">
-            Plan. Organize. Track. In one visual, collaborative space.
+          Planear. Organizar. En un espacio colaborativo visual.
           </p>
 
           <form onSubmit={this.handleSubmit}>
@@ -55,66 +55,17 @@ export default class Hero extends Component {
               value={this.state.email}
               className="form-input"
               type="text"
-              placeholder="Enter your work email"
+              placeholder="Ingresa tu email"
               onChange={e => this.handleEmail(e.target.value)}
               required
             />
             <button className="form-button btn" type="submit">
-              Create free account
+              Crear cuenta gratis
             </button>
             <img src={actionRight} alt="action-left" className="ml-3" />
           </form>
         </div>
 
-        <div className="row">
-          <div className="col-lg-12 mx-auto car">
-            <div
-              id="carouselExampleFade"
-              className="carousel slide carousel-fade"
-              data-ride="carousel"
-            >
-              <div className="carousel-inner ">
-                <div className="carousel-item active car1">
-                  <img className="d-block w-100" src={car1} alt="First slide" />
-                </div>
-                <div className="carousel-item car2">
-                  <img
-                    className="d-block w-100"
-                    src={car2}
-                    alt="Second slide"
-                  />
-                </div>
-                <div className="carousel-item car3">
-                  <img className="d-block w-100" src={car3} alt="Third slide" />
-                </div>
-              </div>
-              <a
-                className="carousel-control-prev"
-                href="#carouselExampleFade"
-                role="button"
-                data-slide="prev"
-              >
-                <span
-                  className="carousel-control-prev-icon"
-                  aria-hidden="true"
-                />
-                <span className="sr-only">Previous</span>
-              </a>
-              <a
-                className="carousel-control-next"
-                href="#carouselExampleFade"
-                role="button"
-                data-slide="next"
-              >
-                <span
-                  className="carousel-control-next-icon"
-                  aria-hidden="true"
-                />
-                <span className="sr-only">Next</span>
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     );
   }

@@ -25,11 +25,11 @@ class navbar extends React.Component {
           <nav id="sidebar">
             <ul className="list-unstyled components">
               <li className="active">
-                <Link to="/dashboard">Inbox</Link>
+                <Link to="/dashboard">Recordatorios</Link>
               </li>
 
               <li>
-                <Link to="/dashboard/calendar">Calendar</Link>
+                <Link to="/dashboard/calendar">Calendario</Link>
               </li>
 
               <li>
@@ -47,21 +47,21 @@ class navbar extends React.Component {
                       bottom: '2px'
                     }}
                   />
-                  Boards
+                  Materias
                 </a>
               </li>
               <ul className="collapse list-unstyled" id="homeSubmenu">
                 <li>
-                  <Link to="/dashboard/boards">Boards1</Link>
+                  <Link to="/dashboard/boards">Pruebas de software</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/boardstwo">Boards2</Link>
+                  <Link to="/dashboard/boardstwo">Gráficas computacionales</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/boardsthree">Boards3</Link>
+                  <Link to="/dashboard/boardsthree">Progamación avanzada</Link>
                 </li>
               </ul>
-              <li>
+              <li style= {{display:"none"}}>
                 <Link to="/dashboard/teams">Team</Link>
               </li>
             </ul>
