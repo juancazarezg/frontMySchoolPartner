@@ -11,8 +11,15 @@ export default class Hero extends Component {
     super();
 
     this.state = {
-      email: ''
+      email: '',
+      password: '',
+      name: ''
     };
+  }
+  handleName(val) {
+    this.setState({
+      name: val
+    });
   }
 
   handleEmail(val) {
@@ -20,14 +27,21 @@ export default class Hero extends Component {
       email: val
     });
   }
+  handlePassword(val) {
+    this.setState({
+      password: val
+    });
+  }
 
   handleSubmit = async e => {
     await axios
-      .post('http://localhost:3010/send-email')
+      .post('http://64.227.87.110/api/user')
       .then(function(response) {
         console.log(response);
         this.setState({
-          email: ''
+          email: '',
+          name: '',
+          password: ''
         });
       })
       .catch(function(error) {
@@ -46,10 +60,20 @@ export default class Hero extends Component {
           Planear. Organizar. En un espacio colaborativo visual.
           </p>
 
-          <form onSubmit={this.handleSubmit}>
-            <img src={actionLeft} alt="action-left" className="mr-3" />
+          <form onSubmit={this.handleSubmit} className="col-lg-8">
             <label htmlFor="email" />
+            <div className="text-center mb-3">
             <input
+              id="name"
+              name="name"
+              value={this.state.email}
+              className="form-input"
+              type="text"
+              placeholder="Ingresa tu nombre"
+              onChange={e => this.handleName(e.target.value)}
+              required
+            />
+              <input
               id="email"
               name="email"
               value={this.state.email}
@@ -59,10 +83,22 @@ export default class Hero extends Component {
               onChange={e => this.handleEmail(e.target.value)}
               required
             />
-            <button className="form-button btn" type="submit">
+            <input
+              id="password"
+              name="password"
+              value={this.state.password}
+              className="form-input"
+              type="password"
+              placeholder="Contraseña"
+              onChange={e => this.handlePassword(e.target.value)}
+              required
+            />
+            </div>
+            
+            <div className="text-center"><button className="form-button btn" type="submit">
               Crear cuenta gratis
-            </button>
-            <img src={actionRight} alt="action-left" className="ml-3" />
+            </button></div>
+            
           </form>
         </div>
 

@@ -86,6 +86,21 @@ nav.navbar {
   margin-bottom: 50px;
 }
 
+input[type="password"] {
+  font-size: 16px;
+  padding: 16px 29px;
+  -webkit-appearance: none;
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid;
+  border-color: #ccc;
+  outline: none;
+  text-align: center;
+  -webkit-transition: border-color 0.1s ease-in-out;
+  transition: border-color 0.1s ease-in-out;
+  margin: 8px 16px 8px 0;
+}
+
 .form-input {
   font-size: 16px;
   padding: 16px 29px;
@@ -95,7 +110,7 @@ nav.navbar {
   border: 1px solid;
   border-color: #ccc;
   outline: none;
-  text-align: left;
+  text-align: center;
   -webkit-transition: border-color 0.1s ease-in-out;
   transition: border-color 0.1s ease-in-out;
   margin: 8px 16px 8px 0;
