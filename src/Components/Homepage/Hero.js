@@ -33,7 +33,7 @@ export default class Hero extends Component {
     });
   }
 
-  handleSubmit = async e => {
+  /*handleSubmit = async e => {
     await axios
       .post('http://64.227.87.110/api/user')
       .then(function(response) {
@@ -47,7 +47,25 @@ export default class Hero extends Component {
       .catch(function(error) {
         console.log(error);
       });
-  };
+  };*/
+
+
+  async postData(){
+    try{
+      let result = await fetch('http://64.227.87.110/api/user',{
+        method: 'POST',mode: 'no-cors', headers: {'Content-type' : 'application/json',
+        },  body: JSON.stringify({name: this.state.name, last_name: this.state.name, email: this.state.email, password: this.state.password})
+      });
+      console.log(result)
+    }catch(e){
+      console.log(e)
+    }
+    
+  }
+
+  repostData(){
+    console.log(this.state.name);
+  }
 
   render() {
     return (
@@ -66,7 +84,7 @@ export default class Hero extends Component {
             <input
               id="name"
               name="name"
-              value={this.state.email}
+              value={this.state.name}
               className="form-input"
               type="text"
               placeholder="Ingresa tu nombre"
@@ -95,7 +113,7 @@ export default class Hero extends Component {
             />
             </div>
             
-            <div className="text-center"><button className="form-button btn" type="submit">
+            <div className="text-center"><button className="form-button btn" type="submit" onClick={() => this.postData()}>
               Crear cuenta gratis
             </button></div>
             

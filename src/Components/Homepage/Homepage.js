@@ -7,8 +7,6 @@ import './Homepage.css';
 
 // COMPONENTS
 import Hero from './Hero';
-import Product from './Product';
-import GetToWork from './GetToWork';
 
 export default class Homepage extends Component {
   login() {
@@ -43,7 +41,7 @@ export default class Homepage extends Component {
 
               <li className="nav-item login-btn" /*onClick={this.login}*/ >
                 <Link to="/login" >
-                  <a className="nav-link">Log in</a>
+                  <span className="nav-link">Log in</span>
                 </Link>
               </li>
             </ul>

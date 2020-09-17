@@ -10,8 +10,26 @@ class Login extends React.Component{
     
         this.state = {
           password: '',
-          email: ''
+          email: '',
+          token: ''
         };
+      }
+
+      async createSession(){
+        console.log("hola")
+        try{
+          let result = await fetch('http://64.227.87.110/api/session',{
+            method: 'POST',mode: 'no-cors', headers: {'Content-type' : 'application/json',
+            },  body: JSON.stringify({email: this.state.email, password: this.state.password})
+          })
+          .then(token => token.json())
+          .then(item => this.setState({
+            token: item.response.token
+          }));
+          console.log(this.state.token)
+        }catch(e){
+          console.log(e)
+        }
       }
 
       handleEmail(val) {
@@ -51,7 +69,7 @@ class Login extends React.Component{
                   <form>
                     <input type="text" id="login" className="fadeIn second" name="login" placeholder="email"  onChange={e => this.handleEmail(e.target.value)}/>
                     <input type="password" id="password" className="fadeIn third" name="login" placeholder="contraseña" onChange={e => this.handlePassword(e.target.value)}/>
-                    <input type="submit" className="fadeIn fourth" value="Iniciar sesión"/>
+                    <input type="submit" className="fadeIn fourth" value="Iniciar sesión" onClick={()=>this.createSession()}/>
                   </form>
                 </div>
               </div>
