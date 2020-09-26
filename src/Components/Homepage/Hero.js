@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import car1 from '../../images/carousel-1.webp';
+/*import car1 from '../../images/carousel-1.webp';
 import car3 from '../../images/carousel-2.webp';
 import car2 from '../../images/carousel-3.webp';
 import actionLeft from '../../images/action-left.PNG';
 import actionRight from '../../images/action-right.PNG';
-import axios from 'axios';
+import axios from 'axios';*/
 
 export default class Hero extends Component {
   constructor() {
@@ -33,27 +33,11 @@ export default class Hero extends Component {
     });
   }
 
-  /*handleSubmit = async e => {
-    await axios
-      .post('http://64.227.87.110/api/user')
-      .then(function(response) {
-        console.log(response);
-        this.setState({
-          email: '',
-          name: '',
-          password: ''
-        });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  };*/
-
 
   async postData(){
     try{
       let result = await fetch('http://64.227.87.110/api/user',{
-        method: 'POST',mode: 'no-cors', headers: {'Content-type' : 'application/json',
+        method: 'POST', headers: {'Content-type' : 'application/json',
         },  body: JSON.stringify({name: this.state.name, last_name: this.state.name, email: this.state.email, password: this.state.password})
       });
       console.log(result)

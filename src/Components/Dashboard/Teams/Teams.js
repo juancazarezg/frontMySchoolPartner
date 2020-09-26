@@ -5,7 +5,7 @@ import axios from 'axios';
 import './Teams.css';
 import ReactTooltip from 'react-tooltip';
 
-import funcs from '../../../utilities/functions';
+//import funcs from '../../../utilities/functions';
 
 import teamIcon from '../../../images/team-icon.png';
 

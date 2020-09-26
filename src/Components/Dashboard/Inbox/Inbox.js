@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./Inbox.css";
 import axios from "axios";
 import Message from "./Message";
+import Navbar from './../side-navbar';
+import Header from './../Header';
 
 export default class Inbox extends Component {
   constructor(props) {
@@ -9,8 +11,11 @@ export default class Inbox extends Component {
 
     this.state = {
       user: {},
-      messages: [],
-      message: ""
+      tareas: {
+        pendientes: 0,
+        enproceso: 12,
+        realizadas: 4
+      }
     };
 
     this.deleteMessage = this.deleteMessage.bind(this);
@@ -72,106 +77,18 @@ export default class Inbox extends Component {
   }
 
   render() {
-    let mappedMessages = this.state.messages.map((message, i) => {
-      console.log(message);
-      return (
-        <Message
-          key={message.message_id}
-          message={message}
-          id={message.message_id}
-          deleteMessage={this.deleteMessage}
-          user={this.state.user}
-          updateMessage={this.updateMessage}
-        />
-      );
-    });
     return (
+      
       <div>
-        <button
-          className="btn btn-primary new-message-btn"
-          data-toggle="modal"
-          data-target="#newMessageModal"
-        >
-          <i className="fa fa-plus pr-2" />
-          New Message
-        </button>
+        <Header />
+        <Navbar />
         <div id="inbox" className="container">
           <div className="row">
             <div className="col-md-8 mr-auto">
-              <h2 className="inbox-title">Inbox</h2>
-
-              <div className="message-count">
-                <p>
-                  <strong>Open ({this.state.messages.length})</strong> / All
-                  Updates
-                </p>
-              </div>
-
-              {this.state.messages.length !== 0 ? (
-                mappedMessages
-              ) : (
-                <div className="inbox-hero">
-                  <h4>Wooohoo!</h4>
-                  <p>No tienes pendientes</p>
-                  <p>Te mereces un descanso</p>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div
-            className="modal fade"
-            id="newMessageModal"
-            role="dialog"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div className="modal-dialog" role="document">
-              <div className="modal-content messages-modal-content" >
-                <div className="modal-header">
-                  <h5 className="modal-title" id="exampleModalLabel">
-                    <i className="fa fa-envelope pr-2" /> New message
-                  </h5>
-                  <button
-                    type="button"
-                    className="close message-close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div className="modal-body">
-                  <form>
-                    <div className="form-group">
-                      <label className="col-form-label">Message:</label>
-                      <textarea
-                        onChange={e => this.handleInput(e.target.value)}
-                        className="form-control"
-                        id="message-text"
-                        value={this.state.message}
-                      />
-                    </div>
-                  </form>
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button
-                    onClick={() => this.addMessage()}
-                    type="button"
-                    className="btn btn-primary messages-btn"
-                    data-dismiss="modal"
-                  >
-                    Send message
-                  </button>
-                </div>
-              </div>
+              <h1 className="">Reportes</h1>
+              <div className="row"><p>Tareas pendientes por realizar:</p> {this.state.tareas.pendientes}</div>
+              <div className="row"><p>Tareas en proceso:</p> {this.state.tareas.enproceso}</div>
+              <div className="row"><p>Tareas realizadas:</p> {this.state.tareas.realizadas}</div>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import Calendar from './Components/Dashboard/Calendar/ReactCalendar';
 import Boards from './Components/Dashboard/Boards/Boards';
 import Login from './Components/Login/Login'
+import Inbox from './Components/Dashboard/Inbox/Inbox'
 import BoardTwo from './Components/Dashboard/Boards/BoardTwo';
 import BoardThree from './Components/Dashboard/Boards/BoardThree';
 import Teams from './Components/Dashboard/Teams/Teams';
@@ -15,7 +16,7 @@ export default (
     <Route exact path="/" component={Homepage} />
     <Route exact path="/dashboard" component={Dashboard} />
     <Route path="/dashboard/calendar" component={Calendar} />
-    <Route path="/dashboard/boards" component={Boards} />
+    <Route path="/dashboard/reports" component={Inbox} />
     <Route path="/dashboard/boards" component={Boards} />
     <Route path="/dashboard/boardstwo" component={BoardTwo} />
     <Route path="/dashboard/boardsthree" component={BoardThree} />

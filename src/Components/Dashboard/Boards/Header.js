@@ -17,7 +17,7 @@ export default class Header extends React.Component {
     this.setState({ inEdition: true });
   }
   editionOff() {
-    if (this.state.txt == '') {
+    if (this.state.txt === '') {
       this.setState({ txt: 'Title' });
     }
     this.setState({ inEdition: false });

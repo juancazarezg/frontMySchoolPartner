@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom"
+//import { Link } from "react-router-dom"
 import logo from "../../images/myschoollogo.png";
 import "./Login.css";
 import axios from 'axios';
+
 
 class Login extends React.Component{
     constructor(props) {
@@ -19,14 +20,13 @@ class Login extends React.Component{
         console.log("hola")
         try{
           let result = await fetch('http://64.227.87.110/api/session',{
-            method: 'POST',mode: 'no-cors', headers: {'Content-type' : 'application/json',
-            },  body: JSON.stringify({email: this.state.email, password: this.state.password})
+            method: 'POST', headers: {'Content-type' : 'application/json',
+            },  body: JSON.stringify({email: this.state.email, password:this.state.password})
           })
           .then(token => token.json())
-          .then(item => this.setState({
-            token: item.response.token
-          }));
-          console.log(this.state.token)
+          .then(item => sessionStorage.setItem('token',item.response.token) 
+          );
+         console.log(sessionStorage.getItem('token'))
         }catch(e){
           console.log(e)
         }

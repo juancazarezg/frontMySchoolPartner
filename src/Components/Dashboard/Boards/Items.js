@@ -8,8 +8,12 @@ export default class Items extends React.Component {
       addingItem: false,
       cardOpen: false,
       item: '',
+      name: '',
+      date:'',
       description: '',
       newItem: '',
+      newItemName: '',
+      newItemDate: '',
       clicked: '',
       items: []
     };
@@ -19,9 +23,30 @@ export default class Items extends React.Component {
   update(e) {
     if (this.state.newItem !== undefined && this.state.newItem !== ' ') {
       var arrayvar = this.state.items.slice();
-      arrayvar.push({ id: arrayvar.length, content: '' + this.state.newItem });
+      arrayvar.push({ id: arrayvar.length, content: '' + this.state.newItem, name: '' + this.state.newItemName, date: ''+this.state.newItemDate });
       this.setState({ items: arrayvar });
       this.txtarea.value = '';
+      this.closeCard(e);
+    }
+  }
+  componentDidMount(){
+    //this.getTasks();
+  }
+
+  async getTasks(){
+    try{
+      let result = await fetch('http://64.227.87.110/api/task/searcher?archived=0&subject_id='+sessionStorage.getItem('subject')+'&type=examen',{
+        method: 'GET', headers: {'Content-type' : 'application/json','Authorization': 'Bearer '+sessionStorage.getItem('token')
+        }
+      })
+      .then(token => token.json())
+      .then(item => this.setState({
+        items: item.response.results
+      })
+      );
+     
+    }catch(e){
+      console.log(e)
     }
   }
 
@@ -29,6 +54,16 @@ export default class Items extends React.Component {
     console.log('add Card in list' + this.props.id);
     this.setState({ addingItem: true });
     this.setState({ newItem: e.target.value });
+  }
+  addCardName(e) {
+    console.log('add Card in list' + this.props.id);
+    this.setState({ addingItem: true });
+    this.setState({ newItemName: e.target.value });
+  }
+  addCardDate(e) {
+    console.log('add Card in list' + this.props.id);
+    this.setState({ addingItem: true });
+    this.setState({ newItemDate: e.target.value });
   }
 
   closeCard() {
@@ -74,13 +109,28 @@ export default class Items extends React.Component {
               item={item}
               onClick={this.seeCard.bind(this)}
             >
-              {item.content}
+              <div className="row" style={{paddingLeft:"1vw"}}><p>Name: {item.name}</p></div>
+              <div className="row" style={{paddingLeft:"1vw"}}><p>Date: {item.deadline}</p></div>
+              <div className="row" style={{paddingLeft:"1vw"}}><p>Content: {item.description}</p></div>
             </li>
           ))}
         </ul>
         <footer>
           {this.state.addingItem ? (
             <div className="newItem">
+              <p>Nombre</p>
+              <input
+                autoFocus
+                onChange={this.addCardName.bind(this)}
+                ref={name => (this.txtarea = name)}
+              />
+              <p>Fecha de entrega</p>
+              <input
+                autoFocus
+                onChange={this.addCardDate.bind(this)}
+                ref={date => (this.txtarea = date)}
+              />
+              <p>Descripción</p>
               <textarea
                 autoFocus
                 onChange={this.addCard.bind(this)}
