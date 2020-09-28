@@ -5,6 +5,10 @@ import Navbar from '../side-navbar';
 import './Boards.css';
 
 export default class Boards extends Component {
+
+  componentDidMount(){
+  }
+
   render() {
     return (
       <div>
@@ -12,7 +16,7 @@ export default class Boards extends Component {
         <Navbar />
 
         <div className="boards-container">
-          <Board />
+          <Board index={this.props.index}/>
         </div>
       </div>
     );

@@ -35,14 +35,6 @@
     "eject": "react-scripts eject"
   },
   "main": "server/server.js",
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:3010"
-    },
-    "/auth": {
-      "target": "http://localhost:3010"
-    }
-  },
   "devDependencies": {
     "axios-mock-adapter": "^1.15.0",
     "cypress": "^3.1.0",

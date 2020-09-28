@@ -1,7 +1,7 @@
 import React from 'react';
 import './side_navbar.css';
 import $ from 'jquery';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import dragula from 'dragula';
 
 class navbar extends React.Component {
@@ -27,7 +27,7 @@ class navbar extends React.Component {
 
   async getSubjects(){
     try{
-      let result = await fetch('http://64.227.87.110/api/subject/getAll',{
+      await fetch('http://64.227.87.110/api/subject/getAll',{
         method: 'GET', headers: {'Content-type' : 'application/json','Authorization': 'Bearer '+sessionStorage.getItem('token')
         }
       })
@@ -48,9 +48,9 @@ class navbar extends React.Component {
       arrayvar.push({ id: arrayvar.length, name: '' + this.state.newItem });
       this.setState({ items: arrayvar });
       this.txtarea.value = '';
-
+      
       try{
-        let result = fetch('http://64.227.87.110/api/subject',{
+        fetch('http://64.227.87.110/api/subject',{
           method: 'POST', headers: {'Content-type' : 'application/json','Authorization': 'Bearer '+sessionStorage.getItem('token')
           }, body: JSON.stringify({name: this.state.newItem})
         });
@@ -126,13 +126,12 @@ class navbar extends React.Component {
               <ul className="collapse list-unstyled" id="homeSubmenu">
                   {items.map(item => (
                     <li
-                      ids={'target-' + item.ids}
-                      key={item.ids}
+                      id={'target-' + item.id}
+                      key={item.id}
                       className="item"
                       item={item}
                     >
-                      <Link to="/dashboard/boards" onClick={sessionStorage.setItem('subject',item.name)}>{item.name}</Link>
-                      {console.log(sessionStorage.getItem('subject'))}
+                      <Link onClick={()=> sessionStorage.setItem('subject',item.id)  & console.log(sessionStorage.getItem('subject')) & window.location.reload(false)}to={"/dashboard/"}  >{item.name}</Link>
                     </li>
                   ))}
                 <li>
@@ -158,9 +157,6 @@ class navbar extends React.Component {
                   }
                 </li>
               </ul>
-              <li>
-                <Link to="/dashboard/calendar">Calendario</Link>
-              </li>
               <li>
                 <Link to="/dashboard/reports">Reportes</Link>
               </li>

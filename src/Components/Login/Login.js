@@ -3,6 +3,7 @@ import React from "react";
 import logo from "../../images/myschoollogo.png";
 import "./Login.css";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 
 class Login extends React.Component{
@@ -19,7 +20,7 @@ class Login extends React.Component{
       async createSession(){
         console.log("hola")
         try{
-          let result = await fetch('http://64.227.87.110/api/session',{
+          await fetch('http://64.227.87.110/api/session',{
             method: 'POST', headers: {'Content-type' : 'application/json',
             },  body: JSON.stringify({email: this.state.email, password:this.state.password})
           })
@@ -69,7 +70,9 @@ class Login extends React.Component{
                   <form>
                     <input type="text" id="login" className="fadeIn second" name="login" placeholder="email"  onChange={e => this.handleEmail(e.target.value)}/>
                     <input type="password" id="password" className="fadeIn third" name="login" placeholder="contraseña" onChange={e => this.handlePassword(e.target.value)}/>
-                    <input type="submit" className="fadeIn fourth" value="Iniciar sesión" onClick={()=>this.createSession()}/>
+                    <Link to="dashboard/">
+                      <input type="submit" className="fadeIn fourth" value="Iniciar sesión" onClick={()=>this.createSession()}/>
+                    </Link>
                   </form>
                 </div>
               </div>

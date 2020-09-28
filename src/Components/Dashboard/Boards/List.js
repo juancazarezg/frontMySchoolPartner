@@ -22,7 +22,7 @@ export default class List extends React.Component {
           <span />
         </button>
         <Header title={this.props.title} />
-        <Items title={this.props.title} id={this.props.id} />
+        <Items title={this.props.title} id={this.props.id} index={this.props.index} tipo={this.props.tipo} />
       </div>
     );
   }

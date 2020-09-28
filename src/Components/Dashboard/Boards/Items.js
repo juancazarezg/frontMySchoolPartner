@@ -14,28 +14,46 @@ export default class Items extends React.Component {
       newItem: '',
       newItemName: '',
       newItemDate: '',
+      newItemHours: '',
       clicked: '',
       items: []
     };
     this.update = this.update.bind(this);
   }
 
-  update(e) {
+  componentDidMount(){
+    this.getTasks();
+    this.update.bind(this)
+  }
+
+  async update(e) {
     if (this.state.newItem !== undefined && this.state.newItem !== ' ') {
       var arrayvar = this.state.items.slice();
-      arrayvar.push({ id: arrayvar.length, content: '' + this.state.newItem, name: '' + this.state.newItemName, date: ''+this.state.newItemDate });
+      arrayvar.push({ id: arrayvar.length, description: '' + this.state.newItem, name: '' + this.state.newItemName, deadline: ''+this.state.newItemDate, estimated_hours: this.state.newItemHours });
       this.setState({ items: arrayvar });
       this.txtarea.value = '';
       this.closeCard(e);
+      console.log({name: this.state.newItemName, description: this.state.newItem, status: "iniciada", type: this.props.tipo, deadline: this.state.newItemDate, estimated_hours: this.state.newItemHours, link: "www.experiencia21.tec.mx", subject_id: sessionStorage.getItem('subject')});
+      console.log(JSON.stringify({name: this.state.newItemName, description: this.state.newItem, status: "iniciada", type: this.props.tipo, deadline: this.state.newItemDate, estimated_hours: this.state.newItemHours, link: "www.experiencia21.tec.mx", subject_id: sessionStorage.getItem('subject')}))
+      try{
+        await fetch('http://64.227.87.110/api/task',{
+          method: 'POST', headers: {'Content-Type' : 'application/json','Authorization': 'Bearer '+sessionStorage.getItem('token')}
+          , body: JSON.stringify({name: this.state.newItemName, description: this.state.newItem, status: "iniciada", type: this.props.tipo, deadline: this.state.newItemDate, estimated_hours: this.state.newItemHours, link: "www.experiencia21.tec.mx", subject_id: sessionStorage.getItem('subject')})
+        })
+        .then(result => console.log(result));
+        //.then(item => console.log(item));
+        
+      }catch(e){
+        console.log(e)
+      }
+      
+
     }
-  }
-  componentDidMount(){
-    //this.getTasks();
   }
 
   async getTasks(){
-    try{
-      let result = await fetch('http://64.227.87.110/api/task/searcher?archived=0&subject_id='+sessionStorage.getItem('subject')+'&type=examen',{
+   try{
+      await fetch('http://64.227.87.110/api/task/searcher?archived=0&subject_id='+sessionStorage.getItem('subject')+'&type='+this.props.tipo,{
         method: 'GET', headers: {'Content-type' : 'application/json','Authorization': 'Bearer '+sessionStorage.getItem('token')
         }
       })
@@ -51,19 +69,21 @@ export default class Items extends React.Component {
   }
 
   addCard(e) {
-    console.log('add Card in list' + this.props.id);
     this.setState({ addingItem: true });
     this.setState({ newItem: e.target.value });
   }
   addCardName(e) {
-    console.log('add Card in list' + this.props.id);
     this.setState({ addingItem: true });
     this.setState({ newItemName: e.target.value });
   }
   addCardDate(e) {
-    console.log('add Card in list' + this.props.id);
     this.setState({ addingItem: true });
     this.setState({ newItemDate: e.target.value });
+  }
+
+  addCardHours(e) {
+    this.setState({ addingItem: true });
+    this.setState({ newItemHours: e.target.value });
   }
 
   closeCard() {
@@ -72,7 +92,6 @@ export default class Items extends React.Component {
   }
 
   seeCard(e) {
-    console.log('Seeing card id:' + e.target.id);
     this.setState({ cardOpen: true });
     this.setState({ item: e.target });
   }
@@ -112,6 +131,7 @@ export default class Items extends React.Component {
               <div className="row" style={{paddingLeft:"1vw"}}><p>Name: {item.name}</p></div>
               <div className="row" style={{paddingLeft:"1vw"}}><p>Date: {item.deadline}</p></div>
               <div className="row" style={{paddingLeft:"1vw"}}><p>Content: {item.description}</p></div>
+              <div className="row" style={{paddingLeft:"1vw"}}><p>Estimated hours:  {item.estimated_hours}</p></div>
             </li>
           ))}
         </ul>
@@ -136,6 +156,12 @@ export default class Items extends React.Component {
                 onChange={this.addCard.bind(this)}
                 ref={el => (this.txtarea = el)}
               />
+              <p>Horas estimadas</p>
+              <input
+                autoFocus
+                onChange={this.addCardHours.bind(this)}
+                ref={hora => (this.txtarea = hora)}
+              />
               <button className="addBtn" onClick={this.update.bind(this)}>
                 Add
               </button>
@@ -145,7 +171,7 @@ export default class Items extends React.Component {
             </div>
           ) : (
             <a className="addCard" onClick={this.addCard.bind(this)}>
-              Añade recordatorio...
+              Añade actividad...
             </a>
           )}
         </footer>

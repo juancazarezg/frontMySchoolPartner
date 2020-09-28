@@ -9,9 +9,10 @@ export default class Board extends React.Component {
   render() {
     return (
       <div className="lists">
-        <List title="Tareas" id={1} />
-        <List title="Proyectos" id={2} />
-        <List title="Examenes" id={3} />
+        <List title="Tareas" id={1} tipo="tarea"/>
+        <List title="Proyectos" id={2} tipo="proyecto"/>
+        <List title="Exámenes" id={1} index={this.props.index} tipo="examen"/>
+        {console.log(this.props.index)}
       </div>
     );
   }

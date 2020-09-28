@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 /*import car1 from '../../images/carousel-1.webp';
 import car3 from '../../images/carousel-2.webp';
 import car2 from '../../images/carousel-3.webp';
@@ -85,21 +86,27 @@ export default class Hero extends Component {
               onChange={e => this.handleEmail(e.target.value)}
               required
             />
-            <input
-              id="password"
-              name="password"
-              value={this.state.password}
-              className="form-input"
-              type="password"
-              placeholder="Contraseña"
-              onChange={e => this.handlePassword(e.target.value)}
-              required
-            />
+           
+              <input
+                id="password"
+                name="password"
+                value={this.state.password}
+                className="form-input"
+                type="password"
+                placeholder="Contraseña"
+                onChange={e => this.handlePassword(e.target.value)}
+                required
+              />
+            
             </div>
             
-            <div className="text-center"><button className="form-button btn" type="submit" onClick={() => this.postData()}>
-              Crear cuenta gratis
-            </button></div>
+            <div className="text-center">
+              <Link to="/login">
+                <button className="form-button btn" type="submit" onClick={() => this.postData()}>
+                  Crear cuenta gratis
+                </button>
+              </Link>
+            </div>
             
           </form>
         </div>

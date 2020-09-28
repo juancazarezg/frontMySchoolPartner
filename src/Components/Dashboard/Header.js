@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "../../images/myschoollogo.png";
 import "./Header.css";
-import axios from "axios";
 import { Link } from "react-router-dom";
 //import funcs from "../../utilities/functions";
 
@@ -15,39 +14,8 @@ class Header extends React.Component {
     };
   }
   componentDidMount() {
-    // let results = funcs.getUsersRequest();
-    // results.then(res => {
-    //   console.log(res);
-    //   this.setState({
-    //     user: res
-    //   });
-    // });
-    axios.get("/api/user-data").then(res => {
-      this.setState({
-        user: res.data
-      });
-    });
   }
 
-  handleEmail(val) {
-    this.setState({
-      email: val
-    });
-  }
-
-  handleSubmit = async e => {
-    await axios
-      .post('http://localhost:3010/add-member')
-      .then(function(response) {
-        console.log(response);
-        this.setState({
-          email: ''
-        });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  };
 
   render() {
     return (
